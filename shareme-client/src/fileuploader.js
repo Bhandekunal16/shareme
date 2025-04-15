@@ -51,7 +51,9 @@ const FileUploader = ({ uploadFlag, akg }) => {
         <input type="file" onChange={handleFileChange} />
         <br />
         <br />
-        <Button type="submit" severity="success">Upload</Button>
+        <Button type="submit" severity="success">
+          Upload
+        </Button>
       </form>
       {message && <p>{message}</p>}
     </div>
