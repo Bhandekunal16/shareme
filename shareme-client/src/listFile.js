@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import './App.css'
-import { Button } from 'primereact/button'; 
+import "./App.css";
+import { Button } from "primereact/button";
 
-const FileList = () => {
+const FileList = ({ message }) => {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState(null);
 
@@ -11,7 +11,7 @@ const FileList = () => {
       .then((response) => response.json())
       .then((data) => setFiles(data))
       .catch((err) => setError(err.message));
-  }, []);
+  }, [message]);
 
   const handleDownload = (filename) => {
     const link = document.createElement("a");
@@ -29,7 +29,7 @@ const FileList = () => {
           files.map((file, index) => (
             <li key={index}>
               <span>{file}</span>
-                <Button onClick={() => handleDownload(file)}>Download</Button>
+              <Button onClick={() => handleDownload(file)}>Download</Button>
             </li>
           ))
         ) : (

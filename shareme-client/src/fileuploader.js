@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Button } from 'primereact/button'; 
+import { Button } from "primereact/button";
 
-const FileUploader = () => {
+const FileUploader = ({ uploadFlag, akg }) => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (akg) {
+      setMessage("File uploaded successfully");
+      uploadFlag(false);
+    }
+  }, [akg, uploadFlag]);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -25,6 +32,9 @@ const FileUploader = () => {
 
       const text = await response.text();
       setMessage(text);
+      setFile(null);
+      uploadFlag(true);
+      console.log("File upload successful AAA");
     } catch (err) {
       console.error(err);
       setMessage("Upload failed");
