@@ -24,10 +24,36 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.use(cors())
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.sendStatus(200).send("Hello World");
+});
+
+app.get("/api/files", (req, res) => {
+  const directoryPath = path.join(__dirname, uploadDir);
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      return res.status(500).json({ message: "Error reading directory" });
+    }
+    res.json(files);
+  });
+});
+
+app.get('/api/download/:filename', (req, res) => {
+  const { filename } = req.params;
+  const filePath = path.join(__dirname, uploadDir, filename); 
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      return res.status(404).send('File not found');
+    }
+
+    res.download(filePath, filename, (err) => {
+      if (err) {
+        console.error('Error during file download', err);
+      }
+    });
+  });
 });
 
 app.post("/upload", upload.single("myFile"), (req, res) => {
