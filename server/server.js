@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-
 const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
@@ -90,6 +89,8 @@ app.delete("/api/remove/:filename", async (req, res) => {
   }
 });
 
-app.listen(port, ip, () => {
-  console.log(`Listening on ${ip}:${port}`);
+app.listen(port, ip, (err) => {
+  err
+    ? console.error(err)
+    : console.log(`Server is running at http://${ip}:${port}`);
 });
