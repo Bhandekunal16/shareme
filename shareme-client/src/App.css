@@ -18,6 +18,11 @@ h2 {
   align-items: center;
 }
 
+.listFileMain p,
+h2 {
+  color: green;
+}
+
 .listFileMain li {
   display: flex;
   justify-content: space-evenly;

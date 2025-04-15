@@ -22,7 +22,7 @@ const FileList = ({ message }) => {
 
   return (
     <div className="listFileMain">
-      <h1>File List</h1>
+      <h2>Download Center</h2>
       {error && <p>Error: {error}</p>}
       <ul>
         {files.length > 0 ? (
