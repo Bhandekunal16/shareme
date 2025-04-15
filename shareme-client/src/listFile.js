@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Button } from "primereact/button";
+import { Card } from "primereact/card";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { Message } from "primereact/message";
 
 const FileList = ({ message }) => {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("http://10.2.1.133:3000/api/files")
       .then((response) => response.json())
-      .then((data) => setFiles(data))
-      .catch((err) => setError(err.message));
+      .then((data) => {
+        setFiles(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, [message]);
 
   const handleDownload = (filename) => {
@@ -22,20 +32,34 @@ const FileList = ({ message }) => {
 
   return (
     <div className="listFileMain">
-      <h2>Download Center</h2>
-      {error && <p>Error: {error}</p>}
-      <ul>
-        {files.length > 0 ? (
-          files.map((file, index) => (
-            <li key={index}>
-              <span>{file}</span>
-              <Button onClick={() => handleDownload(file)}>Download</Button>
-            </li>
-          ))
-        ) : (
-          <p>No files found</p>
-        )}
-      </ul>
+      <h2 className="section-title">📁 Download Center</h2>
+
+      {loading && <ProgressSpinner style={{ width: "40px", height: "40px" }} />}
+
+      {error && <Message severity="error" text={`Error: ${error}`} />}
+
+      {!loading && files.length > 0 ? (
+        <div className="file-list">
+          {files.map((file, index) => (
+            <Card key={index} className="file-card">
+              <div className="file-info">
+                <i
+                  className="pi pi-file"
+                  style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}
+                ></i>
+                <span className="file-name">{file}</span>
+              </div>
+              <Button
+                icon="pi pi-download"
+                className="p-button-sm p-button-primary"
+                onClick={() => handleDownload(file)}
+              />
+            </Card>
+          ))}
+        </div>
+      ) : (
+        !loading && <p className="no-files">No files found.</p>
+      )}
     </div>
   );
 };

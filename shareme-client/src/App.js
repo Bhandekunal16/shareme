@@ -3,6 +3,8 @@ import FileUploader from "./fileuploader";
 import FileList from "./listFile";
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+import 'primeicons/primeicons.css';
+        
 
 function App() {
   const [value, setValue] = useState(false);
