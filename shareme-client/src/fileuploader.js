@@ -46,12 +46,12 @@ const FileUploader = ({ uploadFlag, akg }) => {
       style={{ padding: "2rem", fontFamily: "sans-serif" }}
       className="fileUploadMain"
     >
-      <h2>Upload a File</h2>
+      <h2>Upload & Share</h2>
       <form onSubmit={handleUpload}>
         <input type="file" onChange={handleFileChange} />
         <br />
         <br />
-        <Button type="submit">Upload</Button>
+        <Button type="submit" severity="success">Upload</Button>
       </form>
       {message && <p>{message}</p>}
     </div>
