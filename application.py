@@ -13,7 +13,7 @@ def run_client():
         print("Starting React client...")
         client_process = subprocess.Popen(
             ['npm', 'start'],
-            cwd='shareme-client',  
+            cwd='./shareme-client',  
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
@@ -42,7 +42,7 @@ def run_server():
         print("Starting Express server...")
         server_process = subprocess.Popen(
             ['node', 'server.js'],
-            cwd='server',  
+            cwd='./server',  
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,

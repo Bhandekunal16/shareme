@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const fs = require("fs");
 const multer = require("multer");
@@ -23,6 +24,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+app.use(cors())
 
 app.get("/", (req, res) => {
   res.sendStatus(200).send("Hello World");
