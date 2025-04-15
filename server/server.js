@@ -5,7 +5,7 @@ const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
 const port = 3000;
-const ip = "10.2.1.133";
+const ip = "192.168.90.174";
 const uploadDir = "../data";
 
 if (!fs.existsSync(uploadDir)) {
