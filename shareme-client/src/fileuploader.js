@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
+import { Button } from 'primereact/button'; 
+import { FileUpload } from 'primereact/fileupload';
+
 
 const FileUploader = () => {
   const [file, setFile] = useState(null);
@@ -40,7 +43,7 @@ const FileUploader = () => {
         <input type="file" onChange={handleFileChange} />
         <br />
         <br />
-        <button type="submit">Upload</button>
+        <Button type="submit">Upload</Button>
       </form>
       {message && <p>{message}</p>}
     </div>
