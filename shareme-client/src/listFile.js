@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './App.css'
 
 const FileList = () => {
   const [files, setFiles] = useState([]);
@@ -20,7 +21,7 @@ const FileList = () => {
   };
 
   return (
-    <div>
+    <div className="listFileMain">
       <h1>File List</h1>
       {error && <p>Error: {error}</p>}
       <ul>

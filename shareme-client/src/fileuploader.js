@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import "./App.css";
 
 const FileUploader = () => {
   const [file, setFile] = useState(null);
@@ -30,16 +31,18 @@ const FileUploader = () => {
   };
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+    <div
+      style={{ padding: "2rem", fontFamily: "sans-serif" }}
+      className="fileUploadMain"
+    >
       <h2>Upload a File</h2>
       <form onSubmit={handleUpload}>
         <input type="file" onChange={handleFileChange} />
-        <br /><br />
+        <br />
+        <br />
         <button type="submit">Upload</button>
       </form>
-      {message && (
-        <p style={{ marginTop: "1rem", color: "green" }}>{message}</p>
-      )}
+      {message && <p>{message}</p>}
     </div>
   );
 };
