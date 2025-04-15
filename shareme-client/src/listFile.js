@@ -11,6 +11,10 @@ const FileList = ({ message }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    listFiles();
+  }, [message]);
+
+  const listFiles = () => {
     fetch("http://10.2.1.133:3000/api/files")
       .then((response) => response.json())
       .then((data) => {
@@ -21,13 +25,20 @@ const FileList = ({ message }) => {
         setError(err.message);
         setLoading(false);
       });
-  }, [message]);
+  };
 
   const handleDownload = (filename) => {
     const link = document.createElement("a");
     link.href = `http://10.2.1.133:3000/api/download/${filename}`;
     link.download = filename;
     link.click();
+  };
+
+  const removeStore = async (filename) => {
+    await fetch(`http://10.2.1.133:3000/api/remove/${filename}`, {
+      method: "DELETE",
+    });
+    listFiles();
   };
 
   return (
@@ -53,6 +64,11 @@ const FileList = ({ message }) => {
                 icon="pi pi-download"
                 className="p-button-sm p-button-primary"
                 onClick={() => handleDownload(file)}
+              />
+              <Button
+                icon="pi pi-trash"
+                className="p-button-sm p-button-primary"
+                onClick={() => removeStore(file)}
               />
             </Card>
           ))}
