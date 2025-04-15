@@ -9,11 +9,22 @@
   color: green;
 }
 
-
 /* */
 
 .listFileMain {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.listFileMain li {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40dvw;
+}
+
+@media (max-width: 600px) {
+  .listFileMain li {
+    width: 80vw;
+  }
 }

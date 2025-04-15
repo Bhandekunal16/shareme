@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './App.css'
+import { Button } from 'primereact/button'; 
 
 const FileList = () => {
   const [files, setFiles] = useState([]);
@@ -13,10 +14,9 @@ const FileList = () => {
   }, []);
 
   const handleDownload = (filename) => {
-    // Create a link and trigger the download
     const link = document.createElement("a");
     link.href = `http://10.2.1.133:3000/api/download/${filename}`;
-    link.download = filename; // Optional: specify filename for download
+    link.download = filename;
     link.click();
   };
 
@@ -28,8 +28,8 @@ const FileList = () => {
         {files.length > 0 ? (
           files.map((file, index) => (
             <li key={index}>
-              {file}
-              <button onClick={() => handleDownload(file)}>Download</button>
+              <span>{file}</span>
+                <Button onClick={() => handleDownload(file)}>Download</Button>
             </li>
           ))
         ) : (
