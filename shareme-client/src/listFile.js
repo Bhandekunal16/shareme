@@ -12,10 +12,9 @@ const FileList = ({ message, ip }) => {
 
   useEffect(() => {
     listFiles();
-  }, []);
+  }, [message]);
 
   const listFiles = () => {
-    console.log(ip);
     fetch(`http://${ip}:3000/api/files`)
       .then((response) => response.json())
       .then((data) => {
