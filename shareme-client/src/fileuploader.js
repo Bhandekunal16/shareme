@@ -3,26 +3,28 @@ import "./App.css";
 import { Button } from "primereact/button";
 
 const FileUploader = ({ uploadFlag, akg, ip }) => {
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (akg) {
-      setMessage("File uploaded successfully");
+      setMessage("Files uploaded successfully");
       uploadFlag(false);
     }
   }, [akg, uploadFlag]);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    setFiles(Array.from(e.target.files));
   };
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    if (!file) return setMessage("No file selected");
+    if (files.length === 0) return setMessage("No files selected");
 
     const formData = new FormData();
-    formData.append("myFile", file);
+    files.forEach((file) => {
+      formData.append("myFiles", file);
+    });
 
     try {
       const response = await fetch(`http://${ip}:3000/upload`, {
@@ -32,7 +34,7 @@ const FileUploader = ({ uploadFlag, akg, ip }) => {
 
       const text = await response.text();
       setMessage(text);
-      setFile(null);
+      setFiles([]);
       uploadFlag(true);
     } catch (err) {
       setMessage("Upload failed");
@@ -46,7 +48,7 @@ const FileUploader = ({ uploadFlag, akg, ip }) => {
     >
       <h2>Upload & Share</h2>
       <form onSubmit={handleUpload}>
-        <input type="file" onChange={handleFileChange} />
+        <input type="file" onChange={handleFileChange} multiple />
         <br />
         <br />
         <Button type="submit" severity="success">

@@ -73,8 +73,7 @@ app.get("/api/download/:filename", (req, res) => {
   });
 });
 
-app.post("/upload", upload.single("myFile"), (req, res) => {
-  console.log("Uploaded file:", req.file);
+app.post("/upload", upload.array("myFiles"), (req, res) => {
   res.send("File uploaded successfully!");
 });
 
