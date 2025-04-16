@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./App.css";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
@@ -10,11 +10,7 @@ const FileList = ({ message, ip }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    listFiles();
-  }, [message]);
-
-  const listFiles = async () => {
+  const listFiles = useCallback(async () => {
     try {
       const data = await fetch(`http://${ip}:3000/api/files`);
       const result = await data.json();
@@ -24,7 +20,11 @@ const FileList = ({ message, ip }) => {
       setError(error.message);
       setLoading(false);
     }
-  };
+  }, [ip]);
+
+  useEffect(() => {
+    listFiles();
+  }, [message, listFiles]);
 
   const handleDownload = (filename) => {
     const link = document.createElement("a");
@@ -34,10 +34,14 @@ const FileList = ({ message, ip }) => {
   };
 
   const removeStore = async (filename) => {
-    await fetch(`http://${ip}:3000/api/remove/${filename}`, {
-      method: "DELETE",
-    });
-    listFiles();
+    try {
+      await fetch(`http://${ip}:3000/api/remove/${filename}`, {
+        method: "DELETE",
+      });
+      listFiles();
+    } catch (error) {
+      setError(`Failed to delete ${filename}: ${error.message}`);
+    }
   };
 
   return (
