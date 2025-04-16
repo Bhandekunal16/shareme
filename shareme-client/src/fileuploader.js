@@ -48,7 +48,13 @@ const FileUploader = ({ uploadFlag, akg, ip }) => {
     >
       <h2>Upload & Share</h2>
       <form onSubmit={handleUpload}>
-        <input type="file" onChange={handleFileChange} multiple />
+        <input
+          type="file"
+          onChange={handleFileChange}
+          multiple
+          webkitdirectory="true"
+          directory="true"
+        />
         <br />
         <br />
         <Button type="submit" severity="success">
