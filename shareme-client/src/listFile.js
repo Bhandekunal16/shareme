@@ -4,19 +4,19 @@ import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Message } from "primereact/message";
-import { environment } from "./enviroment";
 
-const FileList = ({ message }) => {
+const FileList = ({ message, ip }) => {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     listFiles();
-  }, [message]);
+  }, []);
 
   const listFiles = () => {
-    fetch(`http://${new environment().ip}:3000/api/files`)
+    console.log(ip);
+    fetch(`http://${ip}:3000/api/files`)
       .then((response) => response.json())
       .then((data) => {
         setFiles(data);
@@ -30,13 +30,13 @@ const FileList = ({ message }) => {
 
   const handleDownload = (filename) => {
     const link = document.createElement("a");
-    link.href = `http://${new environment().ip}:3000/api/download/${filename}`;
+    link.href = `http://${ip}:3000/api/download/${filename}`;
     link.download = filename;
     link.click();
   };
 
   const removeStore = async (filename) => {
-    await fetch(`http://${new environment().ip}:3000/api/remove/${filename}`, {
+    await fetch(`http://${ip}:3000/api/remove/${filename}`, {
       method: "DELETE",
     });
     listFiles();

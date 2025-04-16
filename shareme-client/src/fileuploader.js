@@ -3,7 +3,7 @@ import "./App.css";
 import { Button } from "primereact/button";
 import { environment } from "./enviroment";
 
-const FileUploader = ({ uploadFlag, akg }) => {
+const FileUploader = ({ uploadFlag, akg, ip }) => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
 
@@ -27,7 +27,7 @@ const FileUploader = ({ uploadFlag, akg }) => {
 
     try {
       const response = await fetch(
-        `http://${new environment().ip}:3000/upload`,
+        `http://${ip}:3000/upload`,
         {
           method: "POST",
           body: formData,
