@@ -1,3 +1,10 @@
+.header {
+  background-color: #075e54;
+  color: lightgray;
+  margin: 0%;
+  padding-left: 1%;
+}
+
 .fileUploadMain {
   display: flex;
   flex-direction: column;
@@ -7,7 +14,8 @@
 
 .fileUploadMain p,
 h2 {
-  color: green;
+  color: #128c7e;
+  margin-bottom: 1%;
 }
 
 /* */

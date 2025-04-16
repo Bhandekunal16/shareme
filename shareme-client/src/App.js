@@ -4,6 +4,7 @@ import FileList from "./listFile";
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "primeicons/primeicons.css";
+import Title from "./title";
 
 function App() {
   const [ip, setIp] = useState(null);
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <PrimeReactProvider>
+      <Title/>
       <FileUploader
         uploadFlag={(data) => handleData(data)}
         akg={value}
