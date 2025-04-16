@@ -52,8 +52,6 @@ const FileUploader = ({ uploadFlag, akg, ip }) => {
           type="file"
           onChange={handleFileChange}
           multiple
-          webkitdirectory="true"
-          directory="true"
         />
         <br />
         <br />
