@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Button } from "primereact/button";
-import { environment } from "./enviroment";
 
 const FileUploader = ({ uploadFlag, akg, ip }) => {
   const [file, setFile] = useState(null);
@@ -26,13 +25,10 @@ const FileUploader = ({ uploadFlag, akg, ip }) => {
     formData.append("myFile", file);
 
     try {
-      const response = await fetch(
-        `http://${ip}:3000/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`http://${ip}:3000/upload`, {
+        method: "POST",
+        body: formData,
+      });
 
       const text = await response.text();
       setMessage(text);
