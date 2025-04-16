@@ -14,17 +14,16 @@ const FileList = ({ message, ip }) => {
     listFiles();
   }, [message]);
 
-  const listFiles = () => {
-    fetch(`http://${ip}:3000/api/files`)
-      .then((response) => response.json())
-      .then((data) => {
-        setFiles(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+  const listFiles = async () => {
+    try {
+      const data = await fetch(`http://${ip}:3000/api/files`);
+      const result = await data.json();
+      setFiles(result);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
   };
 
   const handleDownload = (filename) => {
