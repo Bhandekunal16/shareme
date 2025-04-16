@@ -77,7 +77,7 @@ const FileList = ({ message, ip }) => {
           ))}
         </div>
       ) : (
-        !loading && <p className="no-files">No files found.</p>
+        !loading && <p className="pi pi-box"> No files found.</p>
       )}
     </div>
   );
