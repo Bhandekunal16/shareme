@@ -34,9 +34,7 @@ const FileUploader = ({ uploadFlag, akg, ip }) => {
       setMessage(text);
       setFile(null);
       uploadFlag(true);
-      console.log("File upload successful AAA");
     } catch (err) {
-      console.error(err);
       setMessage("Upload failed");
     }
   };
