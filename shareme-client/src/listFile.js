@@ -63,16 +63,18 @@ const FileList = ({ message, ip }) => {
                 ></i>
                 <span className="file-name">{file}</span>
               </div>
-              <Button
-                icon="pi pi-download"
-                className="p-button-sm p-button-primary"
-                onClick={() => handleDownload(file)}
-              />
-              <Button
-                icon="pi pi-trash"
-                className="p-button-sm p-button-primary"
-                onClick={() => removeStore(file)}
-              />
+              <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem" }}>
+                <Button
+                  icon="pi pi-download"
+                  className="p-button-sm p-button-primary"
+                  onClick={() => handleDownload(file)}
+                />
+                <Button
+                  icon="pi pi-trash"
+                  className="p-button-sm p-button-primary"
+                  onClick={() => removeStore(file)}
+                />
+              </div>
             </Card>
           ))}
         </div>
