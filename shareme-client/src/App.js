@@ -12,13 +12,18 @@ function App() {
     setValue(data);
   };
   useEffect(() => {
-    fetch("/config.json")
-      .then((res) => res.json())
-      .then((json) => {
-        setIp(json.ip);
-      })
-      .catch((err) => console.error("Error loading JSON:", err));
+    getEffect();
   }, []);
+
+  const getEffect = async () => {
+    try {
+      const res = await fetch("/config.json");
+      const data = await res.json();
+      setIp(data.ip);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <PrimeReactProvider>
