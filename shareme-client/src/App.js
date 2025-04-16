@@ -12,20 +12,22 @@ function App() {
     setValue(data);
   };
   useEffect(() => {
-    fetch("/config.json") 
+    fetch("/config.json")
       .then((res) => res.json())
       .then((json) => {
-        console.log(json)
         setIp(json.ip);
-        console.log("Data loaded:", json.ip);
       })
       .catch((err) => console.error("Error loading JSON:", err));
   }, []);
 
   return (
     <PrimeReactProvider>
-      <FileUploader uploadFlag={(data) => handleData(data)} akg={value} ip={ip}/>
-      {ip && <FileList message={value} ip={ip}/>}
+      <FileUploader
+        uploadFlag={(data) => handleData(data)}
+        akg={value}
+        ip={ip}
+      />
+      {ip && <FileList message={value} ip={ip} />}
     </PrimeReactProvider>
   );
 }
