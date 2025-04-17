@@ -64,9 +64,8 @@ function shutdown() {
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
-function application() {
-  runClient();
-  runServer();
+async function application() {
+  await Promise.all([runClient(), runServer()]);
   console.log("Both client and server are running. Press Ctrl+C to stop.");
 }
 
