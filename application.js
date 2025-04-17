@@ -3,13 +3,18 @@ const readline = require("readline");
 
 let [clientProcess, serverProcess] = [null, null];
 
+class Application {
+  interfaceCreator(path, arr) {
+    return spawn(arr[0], [arr[1]], { cwd: path, shell: true });
+  }
+}
+
 function runClient() {
   console.log("Starting React client...");
-  clientProcess = spawn("npm", ["start"], {
-    cwd: "./shareme-client",
-    shell: true,
-  });
-
+  clientProcess = new Application().interfaceCreator("./shareme-client", [
+    "npm",
+    "start",
+  ]);
   const rl = readline.createInterface({
     input: clientProcess.stdout,
     terminal: false,
@@ -30,11 +35,10 @@ function runClient() {
 
 function runServer() {
   console.log("Starting Express server...");
-  serverProcess = spawn("node", ["server.js"], {
-    cwd: "./server",
-    shell: true,
-  });
-
+  serverProcess = new Application().interfaceCreator("./server", [
+    "node",
+    "server.js",
+  ]);
   const rl = readline.createInterface({
     input: serverProcess.stdout,
     terminal: false,
