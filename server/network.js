@@ -26,8 +26,8 @@ class networkInterface {
   #writeToFile(input) {
     try {
       fs.writeFileSync(this.#config, JSON.stringify(input, null, 2));
-    } catch (err) {
-      console.error("Error writing file:", err);
+    } catch (e) {
+      console.error("Error", e);
     }
   }
 }
