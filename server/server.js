@@ -14,6 +14,19 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.use(cors());
+
 const removeFile = (filePath) => {
   return new Promise((resolve, reject) => {
     fs.access(filePath, fs.constants.F_OK, (err) => {
@@ -31,18 +44,6 @@ const removeFile = (filePath) => {
     });
   });
 };
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.sendStatus(200).send("Hello World");
