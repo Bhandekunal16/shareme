@@ -1,10 +1,11 @@
 const { spawn } = require("child_process");
 const readline = require("readline");
 
-let ShoutDownSignals = ["SIGINT", "SIGTERM"];
 let [clientProcess, serverProcess] = [null, null];
 
 class Application {
+  ShoutDownSignals = ["SIGINT", "SIGTERM"];
+
   #config = {
     client: {
       path: "./shareme-client",
@@ -77,8 +78,8 @@ class Application {
 
 const app = new Application();
 
-for (let i = 0; i < ShoutDownSignals.length; i++) {
-  process.on(ShoutDownSignals[i], app.shutdown.bind(app));
+for (let i = 0; i < app.ShoutDownSignals.length; i++) {
+  process.on(app.ShoutDownSignals[i], app.shutdown.bind(app));
 }
 
 app.start();
