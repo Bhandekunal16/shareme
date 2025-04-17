@@ -1,1 +1,1 @@
-python3 application.py
+node application.js
