@@ -73,7 +73,7 @@ const app = new Application();
 
 
 for (let i = 0; i < ShoutDownSignals.length; i++) {
-  process.on(ShoutDownSignals[i], app.shutdown);
+  process.on(ShoutDownSignals[i], app.shutdown.bind(app));
 }
 
 function application() {
