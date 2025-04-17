@@ -1,8 +1,7 @@
 const { spawn } = require("child_process");
 const readline = require("readline");
 
-let clientProcess = null;
-let serverProcess = null;
+let [clientProcess, serverProcess] = [null, null];
 
 function runClient() {
   console.log("Starting React client...");
