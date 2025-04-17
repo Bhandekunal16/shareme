@@ -28,22 +28,18 @@ class Application {
   }
 }
 
+const app = new Application();
+
 function runClient() {
   console.log("Starting React client...");
-  clientProcess = new Application().interfaceCreator("./shareme-client", [
-    "npm",
-    "start",
-  ]);
-  new Application().runnerProcess(clientProcess, "React");
+  clientProcess = app.interfaceCreator("./shareme-client", ["npm", "start"]);
+  app.runnerProcess(clientProcess, "React");
 }
 
 function runServer() {
   console.log("Starting Express server...");
-  serverProcess = new Application().interfaceCreator("./server", [
-    "node",
-    "server.js",
-  ]);
-  new Application().runnerProcess(serverProcess, "Express");
+  serverProcess = app.interfaceCreator("./server", ["node", "server.js"]);
+  app.runnerProcess(serverProcess, "Express");
 }
 
 function shutdown() {
