@@ -1,6 +1,7 @@
 const { spawn } = require("child_process");
 const readline = require("readline");
 
+let ShoutDownSignals = ["SIGINT", "SIGTERM"];
 let [clientProcess, serverProcess] = [null, null];
 
 class Application {
@@ -70,7 +71,6 @@ class Application {
 
 const app = new Application();
 
-let ShoutDownSignals = ["SIGINT", "SIGTERM"];
 
 for (let i = 0; i < ShoutDownSignals.length; i++) {
   process.on(ShoutDownSignals[i], app.shutdown);
