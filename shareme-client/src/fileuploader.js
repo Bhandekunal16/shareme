@@ -27,7 +27,7 @@ const FileUploader = ({ uploadFlag, akg, ip }) => {
     });
 
     try {
-      const response = await fetch(`http://${ip}:3000/upload`, {
+      const response = await fetch(`http://${ip}:1111/upload`, {
         method: "POST",
         body: formData,
       });

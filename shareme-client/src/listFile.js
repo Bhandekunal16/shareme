@@ -12,7 +12,7 @@ const FileList = ({ message, ip }) => {
 
   const listFiles = useCallback(async () => {
     try {
-      const data = await fetch(`http://${ip}:3000/api/files`);
+      const data = await fetch(`http://${ip}:1111/api/files`);
       const result = await data.json();
       setFiles(result);
       setLoading(false);
@@ -28,14 +28,14 @@ const FileList = ({ message, ip }) => {
 
   const handleDownload = (filename) => {
     const link = document.createElement("a");
-    link.href = `http://${ip}:3000/api/download/${filename}`;
+    link.href = `http://${ip}:1111/api/download/${filename}`;
     link.download = filename;
     link.click();
   };
 
   const removeStore = async (filename) => {
     try {
-      await fetch(`http://${ip}:3000/api/remove/${filename}`, {
+      await fetch(`http://${ip}:1111/api/remove/${filename}`, {
         method: "DELETE",
       });
       listFiles();
