@@ -62,7 +62,7 @@ class Application {
 
   shutdown() {
     console.log("\nShutting down processes...");
-    let Process = [clientProcess, serverProcess];
+    let Process = [this.#clientProcess, this.#serverProcess];
     for (let i = 0; i < Process.length; i++) {
       if (Process[i]) Process[i].kill();
     }
