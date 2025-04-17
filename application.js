@@ -4,6 +4,19 @@ const readline = require("readline");
 let [clientProcess, serverProcess] = [null, null];
 
 class Application {
+  config = {
+    client: {
+      path: "./shareme-client",
+      command: "npm",
+      args: ["start"],
+    },
+    server: {
+      path: "./server",
+      command: "node",
+      args: ["server.js"],
+    },
+  };
+
   interfaceCreator(path, arr) {
     return spawn(arr[0], [arr[1]], { cwd: path, shell: true });
   }
@@ -32,13 +45,19 @@ const app = new Application();
 
 function runClient() {
   console.log("Starting React client...");
-  clientProcess = app.interfaceCreator("./shareme-client", ["npm", "start"]);
+  clientProcess = app.interfaceCreator(app.config.client.path, [
+    app.config.client.command,
+    app.config.client.args,
+  ]);
   app.runnerProcess(clientProcess, "React");
 }
 
 function runServer() {
   console.log("Starting Express server...");
-  serverProcess = app.interfaceCreator("./server", ["node", "server.js"]);
+  serverProcess = app.interfaceCreator(app.config.server.path, [
+    app.config.server.command,
+    app.config.server.args,
+  ]);
   app.runnerProcess(serverProcess, "Express");
 }
 
