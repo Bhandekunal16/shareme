@@ -4,7 +4,7 @@ const readline = require("readline");
 let [clientProcess, serverProcess] = [null, null];
 
 class Application {
-  config = {
+  #config = {
     client: {
       path: "./shareme-client",
       command: "npm",
@@ -42,18 +42,18 @@ class Application {
 
   runClient() {
     console.log("Starting React client...");
-    clientProcess = this.#interfaceCreator(this.config.client.path, [
-      this.config.client.command,
-      this.config.client.args,
+    clientProcess = this.#interfaceCreator(this.#config.client.path, [
+      this.#config.client.command,
+      this.#config.client.args,
     ]);
     this.#runnerProcess(clientProcess, "React");
   }
 
   runServer() {
     console.log("Starting Express server...");
-    serverProcess = this.#interfaceCreator(this.config.server.path, [
-      this.config.server.command,
-      this.config.server.args,
+    serverProcess = this.#interfaceCreator(this.#config.server.path, [
+      this.#config.server.command,
+      this.#config.server.args,
     ]);
     this.#runnerProcess(serverProcess, "Express");
   }
