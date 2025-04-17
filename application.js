@@ -17,11 +17,11 @@ class Application {
     },
   };
 
-  interfaceCreator(path, arr) {
+  #interfaceCreator(path, arr) {
     return spawn(arr[0], [arr[1]], { cwd: path, shell: true });
   }
 
-  runnerProcess(process, processName) {
+  #runnerProcess(process, processName) {
     const rl = readline.createInterface({
       input: process.stdout,
       terminal: false,
@@ -42,20 +42,20 @@ class Application {
 
   runClient() {
     console.log("Starting React client...");
-    clientProcess = this.interfaceCreator(this.config.client.path, [
+    clientProcess = this.#interfaceCreator(this.config.client.path, [
       this.config.client.command,
       this.config.client.args,
     ]);
-    this.runnerProcess(clientProcess, "React");
+    this.#runnerProcess(clientProcess, "React");
   }
 
   runServer() {
     console.log("Starting Express server...");
-    serverProcess = this.interfaceCreator(this.config.server.path, [
+    serverProcess = this.#interfaceCreator(this.config.server.path, [
       this.config.server.command,
       this.config.server.args,
     ]);
-    this.runnerProcess(serverProcess, "Express");
+    this.#runnerProcess(serverProcess, "Express");
   }
 }
 
