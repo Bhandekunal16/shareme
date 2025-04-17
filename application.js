@@ -7,6 +7,25 @@ class Application {
   interfaceCreator(path, arr) {
     return spawn(arr[0], [arr[1]], { cwd: path, shell: true });
   }
+
+  runnerProcess(process, processName) {
+    const rl = readline.createInterface({
+      input: process.stdout,
+      terminal: false,
+    });
+
+    rl.on("line", (line) => {
+      console.log(`[${processName}] ${line}`);
+    });
+
+    process.stderr.on("data", (data) => {
+      console.error(`[${processName} Error] ${data.toString()}`);
+    });
+
+    process.on("exit", (code) => {
+      console.log(`${processName} process exited with code ${code}`);
+    });
+  }
 }
 
 function runClient() {
@@ -15,22 +34,7 @@ function runClient() {
     "npm",
     "start",
   ]);
-  const rl = readline.createInterface({
-    input: clientProcess.stdout,
-    terminal: false,
-  });
-
-  rl.on("line", (line) => {
-    console.log(`[React] ${line}`);
-  });
-
-  clientProcess.stderr.on("data", (data) => {
-    console.error(`[React Error] ${data.toString()}`);
-  });
-
-  clientProcess.on("exit", (code) => {
-    console.log(`React client exited with code ${code}`);
-  });
+  new Application().runnerProcess(clientProcess, "React");
 }
 
 function runServer() {
@@ -39,22 +43,7 @@ function runServer() {
     "node",
     "server.js",
   ]);
-  const rl = readline.createInterface({
-    input: serverProcess.stdout,
-    terminal: false,
-  });
-
-  rl.on("line", (line) => {
-    console.log(`[Express] ${line}`);
-  });
-
-  serverProcess.stderr.on("data", (data) => {
-    console.error(`[Express Error] ${data.toString()}`);
-  });
-
-  serverProcess.on("exit", (code) => {
-    console.log(`Express server exited with code ${code}`);
-  });
+  new Application().runnerProcess(serverProcess, "Express");
 }
 
 function shutdown() {
