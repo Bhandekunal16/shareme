@@ -1,10 +1,10 @@
 const { spawn } = require("child_process");
 const readline = require("readline");
 
-let [clientProcess, serverProcess] = [null, null];
-
 class Application {
   ShoutDownSignals = ["SIGINT", "SIGTERM"];
+  #clientProcess = null;
+  #serverProcess = null;
 
   #config = {
     client: {
@@ -44,20 +44,20 @@ class Application {
 
   #runClient() {
     console.log("Starting React client...");
-    clientProcess = this.#interfaceCreator(this.#config.client.path, [
+    this.#clientProcess = this.#interfaceCreator(this.#config.client.path, [
       this.#config.client.command,
       this.#config.client.args,
     ]);
-    this.#runnerProcess(clientProcess, "React");
+    this.#runnerProcess(this.#clientProcess, "React");
   }
 
   #runServer() {
     console.log("Starting Express server...");
-    serverProcess = this.#interfaceCreator(this.#config.server.path, [
+    this.#serverProcess = this.#interfaceCreator(this.#config.server.path, [
       this.#config.server.command,
       this.#config.server.args,
     ]);
-    this.#runnerProcess(serverProcess, "Express");
+    this.#runnerProcess(this.#serverProcess, "Express");
   }
 
   shutdown() {
