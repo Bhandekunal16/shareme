@@ -1,12 +1,13 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
-const port = 1111;
 const network = require("./network");
-const ip = new network().ip; 
+
+const app = express();
+const port = 1111;
+const ip = new network().ip;
 const uploadDir = "../data";
 
 if (!fs.existsSync(uploadDir)) {
