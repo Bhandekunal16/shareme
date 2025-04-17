@@ -1,5 +1,4 @@
-const os = require("os");
-const fs = require("fs");
+const [os, fs] = [require("os"), require("fs")];
 
 class networkInterface {
   ip;
