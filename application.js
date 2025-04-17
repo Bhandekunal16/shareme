@@ -67,9 +67,9 @@ let ShoutDownSignals = ["SIGINT", "SIGTERM"];
 for (let i = 0; i < ShoutDownSignals.length; i++) {
   process.on(ShoutDownSignals[i], shutdown);
 }
-
-async function application() {
-  await Promise.all([runClient(), runServer()]);
+function application() {
+  runClient();
+  runServer();
   console.log("Both client and server are running. Press Ctrl+C to stop.");
 }
 
