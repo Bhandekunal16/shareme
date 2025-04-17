@@ -4,7 +4,7 @@ const readline = require("readline");
 let [clientProcess, serverProcess] = [null, null];
 
 class Application {
-  config = {
+  static config = {
     client: {
       path: "./shareme-client",
       command: "npm",
