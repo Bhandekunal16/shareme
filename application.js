@@ -4,16 +4,16 @@ const readline = require("readline");
 let [clientProcess, serverProcess] = [null, null];
 
 class Application {
-  static config = {
+  config = {
     client: {
       path: "./shareme-client",
       command: "npm",
-      args: ["start"],
+      args: "start",
     },
     server: {
       path: "./server",
       command: "node",
-      args: ["server.js"],
+      args: "server.js",
     },
   };
 
