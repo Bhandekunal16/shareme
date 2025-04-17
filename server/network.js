@@ -3,6 +3,8 @@ const fs = require("fs");
 
 class networkInterface {
   ip;
+  #config = "../shareme-client/public/config.json";
+  #localHost = "127.0.0.1";
 
   constructor() {
     this.#getLocalIP();
@@ -18,15 +20,12 @@ class networkInterface {
         }
       }
     }
-    return (this.ip = "127.0.0.1");
+    return (this.ip = this.#localHost);
   }
 
   #writeToFile(input) {
     try {
-      fs.writeFileSync(
-        "../shareme-client/public/config.json",
-        JSON.stringify(input, null, 2)
-      );
+      fs.writeFileSync(this.#config, JSON.stringify(input, null, 2));
     } catch (err) {
       console.error("Error writing file:", err);
     }
