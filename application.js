@@ -41,7 +41,7 @@ class Application {
     });
   }
 
-  runClient() {
+  #runClient() {
     console.log("Starting React client...");
     clientProcess = this.#interfaceCreator(this.#config.client.path, [
       this.#config.client.command,
@@ -50,7 +50,7 @@ class Application {
     this.#runnerProcess(clientProcess, "React");
   }
 
-  runServer() {
+  #runServer() {
     console.log("Starting Express server...");
     serverProcess = this.#interfaceCreator(this.#config.server.path, [
       this.#config.server.command,
@@ -67,19 +67,18 @@ class Application {
     }
     process.exit(0);
   }
+
+  start() {
+    this.#runClient();
+    this.#runServer();
+    console.log("Both client and server are running. Press Ctrl+C to stop.");
+  }
 }
 
 const app = new Application();
-
 
 for (let i = 0; i < ShoutDownSignals.length; i++) {
   process.on(ShoutDownSignals[i], app.shutdown.bind(app));
 }
 
-function application() {
-  app.runClient();
-  app.runServer();
-  console.log("Both client and server are running. Press Ctrl+C to stop.");
-}
-
-application();
+app.start();
