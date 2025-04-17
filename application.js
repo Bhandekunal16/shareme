@@ -3,7 +3,7 @@ const readline = require("readline");
 
 let [clientProcess, serverProcess] = [null, null];
 
-function runClient() {
+async function runClient() {
   console.log("Starting React client...");
   clientProcess = spawn("npm", ["start"], {
     cwd: "./shareme-client",
@@ -28,7 +28,7 @@ function runClient() {
   });
 }
 
-function runServer() {
+async function runServer() {
   console.log("Starting Express server...");
   serverProcess = spawn("node", ["server.js"], {
     cwd: "./server",
