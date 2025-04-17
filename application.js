@@ -57,23 +57,23 @@ class Application {
     ]);
     this.#runnerProcess(serverProcess, "Express");
   }
+
+  shutdown() {
+    console.log("\nShutting down processes...");
+    let Process = [clientProcess, serverProcess];
+    for (let i = 0; i < Process.length; i++) {
+      if (Process[i]) Process[i].kill();
+    }
+    process.exit(0);
+  }
 }
 
 const app = new Application();
 
-function shutdown() {
-  console.log("\nShutting down processes...");
-  let Process = [clientProcess, serverProcess];
-  for (let i = 0; i < Process.length; i++) {
-    if (Process[i]) Process[i].kill();
-  }
-  process.exit(0);
-}
-
 let ShoutDownSignals = ["SIGINT", "SIGTERM"];
 
 for (let i = 0; i < ShoutDownSignals.length; i++) {
-  process.on(ShoutDownSignals[i], shutdown);
+  process.on(ShoutDownSignals[i], app.shutdown);
 }
 
 function application() {
