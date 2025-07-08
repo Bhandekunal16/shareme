@@ -4,11 +4,12 @@ const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
 const network = require("./network");
+const appConfig = require("./app.json");
 
 const app = express();
-const port = 1111;
+const port = appConfig.port;
 const ip = new network().ip;
-const uploadDir = "../data";
+const uploadDir = appConfig.uploadDir;
 
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);

@@ -1,0 +1,6 @@
+{
+  "localHost": "127.0.0.1",
+  "config": "../shareme-client/public/config.json",
+  "port": 1111,
+  "uploadDir": "../data"
+}

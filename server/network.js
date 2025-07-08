@@ -1,9 +1,9 @@
-const [os, fs] = [require("os"), require("fs")];
+const [os, fs, app] = [require("os"), require("fs"), require("./app.json")];
 
 class networkInterface {
   ip;
-  #config = "../shareme-client/public/config.json";
-  #localHost = "127.0.0.1";
+  #config = app.config;
+  #localHost = app.localHost;
   #interfaces = os.networkInterfaces();
 
   constructor() {
